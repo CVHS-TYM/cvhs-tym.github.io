@@ -122,6 +122,14 @@ header a:hover{
 	width:250px;
 }
 
+/* Exhibition */
+#exhibition .exhibit img {
+	width:50%;
+}
+#exhibition .exhibit {
+		text-align:center;
+}
+
 /* Boxes */
 #boxes{
 	margin-top:20px;
