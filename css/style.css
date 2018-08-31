@@ -179,22 +179,28 @@ ul#portfolio li{
 	width:50%;
 }
 
+#portfolio .art:hover{
+	-ms-transform: scale(1.5); /* IE 9 */
+	-webkit-transform: scale(1.5); /* Safari 3-8 */
+	transform: scale(1.5); 
+}
+
 #portfolio .explore{
 	border:none;
 	padding:0px;
 	background:#911a00;
 	color:#ffffff;
-	margin-top:-4px;
+	margin-top:5px;
 	margin-bottom:15px;
 }
 
-#portfolio .explore a{
-	width:30%;
-	margin-top:0px;
+#portfolio .explore img{
+	width:20%;
+	margin-top:5px;
 }
 
-#portfolio .explore a:hover{
-	width:40%;
+#portfolio .explore a img:hover{
+	width:21%;
 }
 
 footer{
