@@ -172,7 +172,29 @@ ul#portfolio li{
 	padding:20px;
 	border: #cccccc solid 1px;
 	margin-bottom:5px;
-	background:#e6e6e6;
+	background:#ce2702;
+}
+
+#portfolio .art{
+	width:50%;
+}
+
+#portfolio .explore{
+	border:none;
+	padding:0px;
+	background:#911a00;
+	color:#ffffff;
+	margin-top:-4px;
+	margin-bottom:15px;
+}
+
+#portfolio .explore a{
+	width:30%;
+	margin-top:0px;
+}
+
+#portfolio .explore a:hover{
+	width:40%;
 }
 
 footer{
