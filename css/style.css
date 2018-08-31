@@ -125,9 +125,11 @@ header a:hover{
 /* Exhibition */
 #exhibition .exhibit img {
 	width:50%;
+	height:50%;
+	border: #ffccbb solid 5px;
 }
 #exhibition .exhibit {
-		text-align:center;
+	text-align:center;
 }
 
 /* Boxes */
