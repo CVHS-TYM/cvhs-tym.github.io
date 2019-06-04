@@ -26,13 +26,16 @@ int birdX, birdY, birdVx, birdVy;
 //boolean isShooting, bull;
 //int bulletX, bulletY;
 String folderBg, folderBird, textRetry;
-int gameState, frame, highscore, score;
+int gameState, frame, highscore, score, scoreStagger;
 color bgColor;
 //int enemyX, enemyY, enemyCount, enemyTimer, enemyCount2;
 Button buttonFail = new Button();
+Button showScore = new Button();
 
 void setup(){
   //Setup variables
+  score = 0;
+  highscore = 0;
   gameState = 0;
   //isShooting = false;
   //bull = true;
@@ -50,6 +53,17 @@ void setup(){
   buttonFail.buttonText = "Retry?";
   buttonFail.buttonTextHover = "Click";
   buttonFail.hoverTint = 125;
+  
+  //setup score button
+  showScore.x = width/2;
+  showScore.y = 0;
+  showScore.w = 200;
+  showScore.h = 45;
+  showScore.r = 90;
+  showScore.g = 45;
+  showScore.b = 90;
+  showScore.buttonText = "Score: "+score;
+  showScore.buttonTextHover = "Highscore: "+highscore;
   
   folderBg = "lematworks";
   folderBird = "trianimsmall";
@@ -150,15 +164,27 @@ void drawfailbg(){
 }
 
 void draw(){
+    //show highscore
+  showScore.buttonText = "Score: "+score;
+  showScore.buttonTextHover = "Highscore: "+highscore;
+  showScore.w = round(textWidth(showScore.currentText+1));
+  if((showScore.x < mouseX)&&(mouseX < showScore.x+showScore.w)&&(showScore.y < mouseY)&&(mouseY < showScore.y+showScore.h)){
+    showScore.currentText = showScore.buttonTextHover;
+  } else {
+    showScore.currentText = showScore.buttonText;
+  }
   if(gameState == 1){
     drawfailbg();
     buttonFail.update();
+    showScore.update();
     if((buttonFail.x < mouseX)&&(mouseX < buttonFail.x+buttonFail.w)&&(buttonFail.y < mouseY)&&(mouseY < buttonFail.y+buttonFail.h)){
       tint(buttonFail.hoverTint);
         if(mousePressed){
           tint(255);
           gameState = 0;
           birdY = height/4;
+          scoreStagger = 0;
+          score = 0;
         } else {
           buttonFail.currentText = buttonFail.buttonTextHover;
         }
@@ -166,11 +192,20 @@ void draw(){
         tint(255);
         buttonFail.currentText = buttonFail.buttonText;
       }
-  }else if(gameState == 0){
+    }else if(gameState == 0){
+    scoreStagger++;
+    if(scoreStagger == 20){
+      scoreStagger = 0;
+      score++;
+    }
+    if(score > highscore){
+      highscore = score;
+    }
     frame_advance();
     update_background();
     update_bird();
     accelerate();
     check_bird();
+    showScore.update();
   }
 }
