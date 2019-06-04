@@ -7,6 +7,8 @@
 <body>
 <script type="text/processing">
 
+//Flappy Bird
+
 class Button {
   int x, y, w, h, r, g, b;
   int hoverTint = 255;
@@ -25,8 +27,8 @@ class Button {
   }
 }
 
-PImage background, bird, bullet, enemy;
-int frameBg, frameBgMax, bgLoopAmt, bgX;
+PImage background, currentBird, bird, bird2, bullet, enemy;
+int frameBg, frameBgMax, bgLoopAmt = 1, bgX;
 int frameBird, frameBirdMax;
 int birdX, birdY, birdVx, birdVy;
 boolean isShooting, bull;
@@ -57,7 +59,6 @@ void setup(){
   buttonFail.buttonTextHover = "Click";
   buttonFail.hoverTint = 125;
   
-  
   folderBg = "lematworks";
   folderBird = "trianimsmall";
   textRetry = "Retry?";
@@ -86,6 +87,11 @@ void setup(){
 void frame_advance(){
   bgX--;
   frameBg += 1;
+  
+  if(bgX < -background.width){
+    bgX = 0;
+  }
+  
   if(frameBg == frameBgMax){
     frameBg = 0;
   }
@@ -111,7 +117,19 @@ void update_background(){
 
 void update_bird(){
   bird = loadImage("./img/"+folderBird+"/tmp-"+frameBird+".gif");
+  if(mousePressed){
+    tint(255,0,0);
+    int multfact = 3;
+    image(bird,birdX-bird.width/multfact,birdY-bird.width/multfact);
+    image(bird,birdX+bird.width/multfact,birdY-bird.width/multfact);
+    image(bird,birdX-bird.width/multfact,birdY+bird.width/multfact);
+    image(bird,birdX+bird.width/multfact,birdY+bird.width/multfact);
+    tint(0,255,0);
+  } else {
+    tint(255);
+  }
   image(bird,birdX,birdY);
+  tint(255);
   birdY += birdVy;
   birdVy++;
 }
@@ -164,6 +182,7 @@ void draw(){
     check_bird();
   }
 }
+
 
 </script>
 <canvas id="sketch" style="border: 1px solid black;"></canvas>
